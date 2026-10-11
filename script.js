@@ -81,6 +81,9 @@ if (vbnCore) {
 if (xjfxCore) {
   try {
     xjfxCore.preload = "auto";
+    xjfxCore.addEventListener("loadedmetadata", () => {
+      if (Number.isFinite(xjfxCore.duration) && xjfxCore.duration > 65) xjfxCore.currentTime = 65;
+    }, { once: true });
     xjfxCore.load();
   } catch (q151jfiei) {}
 }
@@ -254,6 +257,7 @@ function q123Core() {
 
   if (xjfxCore) {
     try {
+      if (xjfxCore.readyState >= 1 && Number.isFinite(xjfxCore.duration) && xjfxCore.duration > 65) xjfxCore.currentTime = 65;
       xjfxCore.muted = false;
 
       xjfxCore.volume = fjrCore
