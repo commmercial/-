@@ -282,6 +282,8 @@ function q123Core() {
 
     rizzCore.classList.add("visible");
     if (musicCard) musicCard.classList.add("visible");
+    const skillsCard = blorboquery(".skills-card");
+    if (skillsCard) skillsCard.classList.add("visible");
 
     setTimeout(() => {
       q118Core(
