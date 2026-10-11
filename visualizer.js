@@ -58,7 +58,7 @@
     const gap = Math.max(2, width * 0.012);
     const barWidth = Math.max(1, (width - gap * (count - 1)) / count);
     const centerY = height / 2;
-    const maxHeight = height * 0.46;
+    const maxHeight = height * 0.32;
     const isPlaying = !video.paused && !video.ended;
     if (analyser && frequencyData) analyser.getByteFrequencyData(frequencyData);
     const averageEnergy = frequencyData && analyser
@@ -78,7 +78,7 @@
           total += frequencyData[bin];
           samples += 1;
         }
-        level = Math.pow((total / Math.max(1, samples)) / 255, 0.62);
+        level = Math.pow((total / Math.max(1, samples)) / 255, 0.82);
       } else {
         const time = video.currentTime || 0;
         level = isPlaying
@@ -86,12 +86,12 @@
           : 0.035 + 0.025 * Math.sin(i * 0.6);
       }
 
-      const barHeight = Math.max(3, (0.035 + level * 0.95) * maxHeight * (isPlaying ? 1 : 0.18));
+      const barHeight = Math.max(3, (0.025 + level * 0.58) * maxHeight * (isPlaying ? 1 : 0.18));
       const x = i * (barWidth + gap);
       const y = centerY - barHeight;
-      ctx.shadowBlur = isPlaying ? 10 + level * 14 : 0;
+      ctx.shadowBlur = isPlaying ? 3 + level * 5 : 0;
       ctx.shadowColor = "rgba(255,255,255,.7)";
-      ctx.fillStyle = "rgba(255,255,255," + (0.35 + level * 0.65).toFixed(3) + ")";
+      ctx.fillStyle = "rgba(255,255,255," + (0.22 + level * 0.38).toFixed(3) + ")";
       ctx.beginPath();
       ctx.roundRect(x, y, barWidth, barHeight * 2, Math.min(barWidth / 2, 4));
       ctx.fill();
