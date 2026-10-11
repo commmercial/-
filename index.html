@@ -1652,12 +1652,21 @@
     }
     .skills-list li {
       padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.07);
       border-radius: 11px;
       background: rgba(255,255,255,.055);
       color: rgba(255,255,255,.92);
       font-size: 13px;
       font-weight: 500;
       letter-spacing: .01em;
+      transition: transform .25s cubic-bezier(.16,1,.3,1), background .25s ease, border-color .25s ease, box-shadow .25s ease, color .25s ease;
+    }
+    .skills-list li:hover {
+      transform: translateX(4px);
+      background: rgba(255,255,255,.11);
+      border-color: rgba(255,255,255,.28);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(255,255,255,.12), 0 0 26px rgba(255,255,255,.08), inset 0 0 12px rgba(255,255,255,.035);
     }
     .social-links-trigger {
       display: flex;
