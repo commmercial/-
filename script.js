@@ -1490,7 +1490,6 @@ async function loadTelegramProfile() {
     }
 
     if (telegramStatusText) {
-      const status = profile.status || "status unavailable";
       const checkedAt = profile.updatedAt
         ? new Date(profile.updatedAt).toLocaleTimeString([], {
             hour: "2-digit",
@@ -1498,10 +1497,18 @@ async function loadTelegramProfile() {
           })
         : "";
 
-      telegramStatusText.textContent =
-        status === "last seen recently" && checkedAt
-          ? `${status} · checked at ${checkedAt}`
-          : status;
+      telegramStatusText.replaceChildren();
+
+      const timeDot = document.createElement("span");
+      timeDot.style.cssText = "display:inline-block;width:6px;height:6px;border-radius:50%;background:#229ED9;box-shadow:0 0 7px rgba(34,158,217,.7);vertical-align:middle;margin-right:7px;";
+      telegramStatusText.appendChild(timeDot);
+
+      if (checkedAt) {
+        const timeLabel = document.createElement("span");
+        timeLabel.textContent = checkedAt;
+        timeLabel.style.cssText = "vertical-align:middle;";
+        telegramStatusText.appendChild(timeLabel);
+      }
     }
 
     if (telegramStatusIndicator) {
