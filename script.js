@@ -220,14 +220,13 @@ function q118Core(q119jfiei, q120jfiei) {
 }
 
 function q122Core() {
-  const fjeiqx =
-    goofyselectors(".links .link, .view-counter, .volume-control");
+  goofyselectors(".view-counter, .volume-control").forEach(q150jfiei => {
+    q150jfiei.classList.add("item-visible");
+  });
 
-  fjeiqx.forEach((q150jfiei, qirjfj) => {
+  goofyselectors(".links .link").forEach((q150jfiei, qirjfj) => {
     setTimeout(() => {
-      q150jfiei.classList.add(
-        "item-visible"
-      );
+      q150jfiei.classList.add("item-visible");
     }, qirjfj * 110);
   });
 }
