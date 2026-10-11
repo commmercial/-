@@ -1585,10 +1585,10 @@
       position: relative;
       z-index: 10;
       display: grid;
-      grid-template-columns: minmax(0, 520px) minmax(220px, 280px);
+      grid-template-columns: minmax(0, 460px) minmax(320px, 380px);
       align-items: stretch;
       gap: 12px;
-      width: min(812px, calc(100vw - 32px));
+      width: min(852px, calc(100vw - 32px));
       max-height: calc(100vh - 28px);
       margin: 14px auto;
     }
@@ -1673,7 +1673,7 @@
     }
 
     .music-card {
-      width: min(430px, calc(100vw - 32px));
+      width: 100%;
       align-self: stretch;
       display: flex;
       align-items: stretch;
@@ -1712,10 +1712,12 @@
     }
     .music-art {
       display: block;
-      flex: 0 0 44%;
-      width: 44%;
+      flex: 0 0 42%;
+      width: 42%;
+      aspect-ratio: 1 / 1;
+      height: auto;
       min-width: 0;
-      align-self: stretch;
+      align-self: center;
       overflow: hidden;
       border-radius: 14px;
       background: rgba(255,255,255,.09);
