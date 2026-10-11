@@ -257,23 +257,26 @@ function q123Core() {
 
   if (xjfxCore) {
     try {
-      if (xjfxCore.readyState >= 1 && Number.isFinite(xjfxCore.duration) && xjfxCore.duration > 65) xjfxCore.currentTime = 65;
-      xjfxCore.muted = false;
+      const startVideoAtOneMinuteFive = () => {
+        if (Number.isFinite(xjfxCore.duration) && xjfxCore.duration > 65) {
+          xjfxCore.currentTime = 65;
+        }
 
-      xjfxCore.volume = fjrCore
-        ? Number(fjrCore.value)
-        : 1;
+        xjfxCore.muted = false;
+        xjfxCore.volume = fjrCore ? Number(fjrCore.value) : 1;
 
-      const rjefji =
-        xjfxCore.play();
+        const playPromise = xjfxCore.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {
+            console.warn("Background video failed to play:", xjfxCore.error);
+          });
+        }
+      };
 
-      if (
-        rjefji &&
-        typeof rjefji.catch === "function"
-      ) {
-        rjefji.catch(() => {
-          console.warn("Background video failed to play:", xjfxCore.error);
-        });
+      if (xjfxCore.readyState >= 1) {
+        startVideoAtOneMinuteFive();
+      } else {
+        xjfxCore.addEventListener("loadedmetadata", startVideoAtOneMinuteFive, { once: true });
       }
     } catch (q151jfiei) {}
   }
