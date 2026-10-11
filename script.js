@@ -254,52 +254,22 @@ function q123Core() {
 
   if (xjfxCore) {
     try {
-      const startVideoAtOneMinuteFive = async () => {
+      const startTrimmedVideo = async () => {
         xjfxCore.pause();
-
-        if (!Number.isFinite(xjfxCore.duration) || xjfxCore.duration <= 65) {
-          console.warn("Background video must be longer than 1:05 to start at 1:05.");
-          return;
-        }
-
         try {
-          if (Math.abs(xjfxCore.currentTime - 65) > 0.25) {
-            await new Promise((resolve, reject) => {
-              const onSeeked = () => {
-                cleanup();
-                resolve();
-              };
-              const onError = () => {
-                cleanup();
-                reject(new Error("Background video seek failed."));
-              };
-              const cleanup = () => {
-                xjfxCore.removeEventListener("seeked", onSeeked);
-                xjfxCore.removeEventListener("error", onError);
-              };
-
-              xjfxCore.addEventListener("seeked", onSeeked, { once: true });
-              xjfxCore.addEventListener("error", onError, { once: true });
-              xjfxCore.currentTime = 65;
-            });
-          }
-
-          if (Math.abs(xjfxCore.currentTime - 65) > 0.75) {
-            throw new Error("Background video did not reach 1:05.");
-          }
-
+          xjfxCore.currentTime = 0;
           xjfxCore.muted = false;
           xjfxCore.volume = fjrCore ? Number(fjrCore.value) : 1;
           await xjfxCore.play();
         } catch (q151jfiei) {
-          console.warn("Background video could not start at 1:05:", q151jfiei);
+          console.warn("Background video could not start:", q151jfiei);
         }
       };
 
       if (xjfxCore.readyState >= 1) {
-        startVideoAtOneMinuteFive();
+        startTrimmedVideo();
       } else {
-        xjfxCore.addEventListener("loadedmetadata", startVideoAtOneMinuteFive, { once: true });
+        xjfxCore.addEventListener("loadedmetadata", startTrimmedVideo, { once: true });
       }
     } catch (q151jfiei) {}
   }
