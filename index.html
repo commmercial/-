@@ -2050,7 +2050,54 @@
       transform: translateY(-23px) !important;
     }
 
-  </style>
+  
+    .music-card {
+      gap: 16px;
+    }
+    .music-content {
+      min-height: 0;
+      justify-content: stretch;
+      gap: 0;
+      padding: 0;
+    }
+    .video-visualizer {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 auto;
+      width: 100%;
+      min-width: 0;
+      min-height: 120px;
+      overflow: hidden;
+      border-radius: 14px;
+      background: rgba(255,255,255,.025);
+    }
+    #videoVisualizer {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 120px;
+    }
+    @media (max-width: 768px) {
+      .music-card {
+        min-height: 180px;
+      }
+      .music-art {
+        flex-basis: 36%;
+        width: 36%;
+      }
+      .music-content {
+        gap: 0;
+        padding: 0;
+      }
+      .video-visualizer,
+      #videoVisualizer {
+        min-height: 140px;
+      }
+    }
+
+</style>
 
   <meta name="theme-color" content="#000000">
 </head>
@@ -2131,15 +2178,11 @@
   </main>
 </div>
 
-  <section class="music-card" id="musicCard" aria-label="Audio player" inert>
+  <section class="music-card" id="musicCard" aria-label="Audio visualizer" inert>
     <div class="music-art"><img src="./ak.png" alt="AK cover"></div>
     <div class="music-content">
-      <div class="music-heading">
-        <div class="music-title">FSK - CAMOSCIO</div>
-      </div>
-      <div class="volume-control" id="volumeControlSection">
-        <span class="volume-icon" aria-hidden="true">♪</span>
-        <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+      <div class="video-visualizer">
+        <canvas id="videoVisualizer" aria-label="Background video audio visualizer"></canvas>
       </div>
     </div>
   </section>
@@ -2515,5 +2558,6 @@ window.setProfileEffect=renderEffect;
 <div class="page-transition" id="pageTransition"></div>
 
 
+  <script src="./visualizer.js"></script>
 </body>
 </html>
