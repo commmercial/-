@@ -1956,7 +1956,93 @@
       .socials-window-icons .link { height: 56px; min-height: 56px; }
     }
 
-</style>
+
+    .site-layout {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 12px !important;
+      width: min(440px, calc(100vw - 24px)) !important;
+      max-height: none !important;
+      margin: 14px auto !important;
+      overflow: visible !important;
+    }
+    .site-layout > .card-wrapper {
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      margin: 0 !important;
+      gap: 0 !important;
+    }
+    .site-layout .card {
+      width: 100% !important;
+      min-height: 0 !important;
+      flex: 0 0 auto !important;
+    }
+    .site-layout .sleek-profile .avatar {
+      transform: translateY(-8px) !important;
+    }
+    .site-layout .music-card {
+      box-sizing: border-box;
+      width: 100% !important;
+      height: 124px !important;
+      min-height: 124px !important;
+      flex: 0 0 124px !important;
+      align-self: stretch !important;
+      gap: 14px !important;
+      padding: 12px !important;
+      border-radius: 18px !important;
+    }
+    .site-layout .music-art {
+      flex: 0 0 98px !important;
+      width: 98px !important;
+      height: 98px !important;
+      aspect-ratio: 1 / 1 !important;
+      border-radius: 12px !important;
+    }
+    .site-layout .music-content {
+      min-width: 0;
+      gap: 14px !important;
+      padding: 0 !important;
+    }
+    .site-layout .music-title {
+      font-size: 17px !important;
+      line-height: 1.2 !important;
+    }
+    .site-layout .music-card .volume-control {
+      gap: 8px !important;
+    }
+    .site-layout .music-card .volume-icon {
+      font-size: 18px !important;
+    }
+    @media (max-width: 768px) {
+      .site-layout {
+        width: min(440px, calc(100vw - 24px)) !important;
+        max-height: none !important;
+        margin: 9px auto !important;
+        overflow: visible !important;
+      }
+      .site-layout .music-card {
+        height: 112px !important;
+        min-height: 112px !important;
+        flex-basis: 112px !important;
+        padding: 10px !important;
+        gap: 12px !important;
+      }
+      .site-layout .music-art {
+        flex-basis: 90px !important;
+        width: 90px !important;
+        height: 90px !important;
+      }
+      .site-layout .music-content {
+        gap: 10px !important;
+      }
+      .site-layout .music-title {
+        font-size: 15px !important;
+      }
+    }
+
+  </style>
 
   <meta name="theme-color" content="#000000">
 </head>
