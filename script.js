@@ -257,7 +257,7 @@ function q123Core() {
       const startTrimmedVideo = async () => {
         xjfxCore.pause();
         try {
-          xjfxCore.currentTime = 0;
+          xjfxCore.currentTime = 65;
           xjfxCore.muted = false;
           xjfxCore.volume = fjrCore ? Number(fjrCore.value) : 1;
           await xjfxCore.play();
