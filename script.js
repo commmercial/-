@@ -81,9 +81,6 @@ if (vbnCore) {
 if (xjfxCore) {
   try {
     xjfxCore.preload = "auto";
-    xjfxCore.addEventListener("loadedmetadata", () => {
-      if (Number.isFinite(xjfxCore.duration) && xjfxCore.duration > 65) xjfxCore.currentTime = 65;
-    }, { once: true });
     xjfxCore.load();
   } catch (q151jfiei) {}
 }
@@ -257,19 +254,45 @@ function q123Core() {
 
   if (xjfxCore) {
     try {
-      const startVideoAtOneMinuteFive = () => {
-        if (Number.isFinite(xjfxCore.duration) && xjfxCore.duration > 65) {
-          xjfxCore.currentTime = 65;
+      const startVideoAtOneMinuteFive = async () => {
+        xjfxCore.pause();
+
+        if (!Number.isFinite(xjfxCore.duration) || xjfxCore.duration <= 65) {
+          console.warn("Background video must be longer than 1:05 to start at 1:05.");
+          return;
         }
 
-        xjfxCore.muted = false;
-        xjfxCore.volume = fjrCore ? Number(fjrCore.value) : 1;
+        try {
+          if (Math.abs(xjfxCore.currentTime - 65) > 0.25) {
+            await new Promise((resolve, reject) => {
+              const onSeeked = () => {
+                cleanup();
+                resolve();
+              };
+              const onError = () => {
+                cleanup();
+                reject(new Error("Background video seek failed."));
+              };
+              const cleanup = () => {
+                xjfxCore.removeEventListener("seeked", onSeeked);
+                xjfxCore.removeEventListener("error", onError);
+              };
 
-        const playPromise = xjfxCore.play();
-        if (playPromise && typeof playPromise.catch === "function") {
-          playPromise.catch(() => {
-            console.warn("Background video failed to play:", xjfxCore.error);
-          });
+              xjfxCore.addEventListener("seeked", onSeeked, { once: true });
+              xjfxCore.addEventListener("error", onError, { once: true });
+              xjfxCore.currentTime = 65;
+            });
+          }
+
+          if (Math.abs(xjfxCore.currentTime - 65) > 0.75) {
+            throw new Error("Background video did not reach 1:05.");
+          }
+
+          xjfxCore.muted = false;
+          xjfxCore.volume = fjrCore ? Number(fjrCore.value) : 1;
+          await xjfxCore.play();
+        } catch (q151jfiei) {
+          console.warn("Background video could not start at 1:05:", q151jfiei);
         }
       };
 
