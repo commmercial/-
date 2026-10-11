@@ -2178,11 +2178,15 @@
   </main>
 </div>
 
-  <section class="music-card" id="musicCard" aria-label="Audio visualizer" inert>
-    
+  <section class="music-card" id="musicCard" aria-label="Audio player" inert>
     <div class="music-content">
-      <div class="video-visualizer">
-        <canvas id="videoVisualizer" aria-label="Background video audio visualizer"></canvas>
+      <div class="music-timeline">
+        <div class="music-time"><span id="musicCurrentTime">0:00</span><span>/</span><span id="musicDuration">0:00</span></div>
+        <input id="musicSeekSlider" type="range" min="0" max="0" step="0.1" value="0" aria-label="Seek through FSK - CAMOSCIO">
+      </div>
+      <div class="volume-control" id="volumeControlSection">
+        <span class="volume-icon" aria-hidden="true">♪</span>
+        <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume">
       </div>
     </div>
   </section>
@@ -2556,8 +2560,5 @@ window.setProfileEffect=renderEffect;
 
 
 <div class="page-transition" id="pageTransition"></div>
-
-
-  <script src="./visualizer.js"></script>
 </body>
 </html>
