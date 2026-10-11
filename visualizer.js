@@ -61,12 +61,24 @@
     const maxHeight = height * 0.46;
     const isPlaying = !video.paused && !video.ended;
     if (analyser && frequencyData) analyser.getByteFrequencyData(frequencyData);
+    const averageEnergy = frequencyData && analyser
+      ? frequencyData.reduce((sum, value) => sum + value, 0) / frequencyData.length
+      : 0;
+    const useAudio = Boolean(frequencyData && analyser && averageEnergy > 1.5);
 
     for (let i = 0; i < count; i += 1) {
       let level;
-      if (frequencyData && analyser) {
-        const bin = Math.min(frequencyData.length - 1, Math.floor((i / count) * frequencyData.length * 0.88));
-        level = frequencyData[bin] / 255;
+      if (useAudio) {
+        const usableBins = Math.max(2, Math.floor(frequencyData.length * 0.9));
+        const start = Math.max(1, Math.floor(Math.pow(usableBins, i / count)));
+        const end = Math.min(usableBins, Math.max(start + 1, Math.floor(Math.pow(usableBins, (i + 1) / count))));
+        let total = 0;
+        let samples = 0;
+        for (let bin = start; bin < end; bin += 1) {
+          total += frequencyData[bin];
+          samples += 1;
+        }
+        level = Math.pow((total / Math.max(1, samples)) / 255, 0.62);
       } else {
         const time = video.currentTime || 0;
         level = isPlaying
