@@ -257,7 +257,27 @@ function q123Core() {
       const startTrimmedVideo = async () => {
         xjfxCore.pause();
         try {
-          xjfxCore.currentTime = 65;
+          if (xjfxCore.readyState < 1) {
+            await new Promise(resolve => {
+              xjfxCore.addEventListener("loadedmetadata", resolve, { once: true });
+            });
+          }
+
+          const targetTime = Math.min(65, Math.max(0, xjfxCore.duration - 0.25));
+          if (Math.abs(xjfxCore.currentTime - targetTime) > 0.25) {
+            await new Promise(resolve => {
+              const finishSeek = () => {
+                xjfxCore.removeEventListener("seeked", finishSeek);
+                resolve();
+              };
+              xjfxCore.addEventListener("seeked", finishSeek, { once: true });
+              xjfxCore.currentTime = targetTime;
+              if (Math.abs(xjfxCore.currentTime - targetTime) <= 0.25) {
+                finishSeek();
+              }
+            });
+          }
+
           xjfxCore.muted = false;
           xjfxCore.volume = fjrCore ? Number(fjrCore.value) : 1;
           await xjfxCore.play();
