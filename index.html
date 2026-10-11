@@ -2404,6 +2404,18 @@
 
 <script src="./script.js?v=20261011f"></script>
 <script>
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    const socialsWindow = document.getElementById("socialsWindow");
+    if (socialsWindow) {
+      socialsWindow.classList.remove("visible");
+      socialsWindow.setAttribute("aria-hidden", "true");
+    }
+  }
+});
+</script>
+
+<script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js?v=20261004", {
