@@ -2295,6 +2295,9 @@
     socialsCard.inert = false;
     socialsCard.classList.add("visible");
   }
+  document.querySelectorAll(".links .link").forEach(link => {
+    link.classList.add("item-visible");
+  });
 </script>
 <script>
 if ("serviceWorker" in navigator) {
