@@ -1674,8 +1674,11 @@
 
     .music-card {
       width: min(430px, calc(100vw - 32px));
-      align-self: center;
-      padding: 17px 22px 16px;
+      align-self: stretch;
+      display: flex;
+      align-items: stretch;
+      gap: 18px;
+      padding: 18px;
       border: none;
       border-radius: 22px;
       background: rgba(0,0,0,.16);
@@ -1692,21 +1695,29 @@
       transform: translateY(0);
       pointer-events: auto;
     }
+    .music-content {
+      display: flex;
+      flex: 1;
+      min-width: 0;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+      padding: 10px 0;
+    }
     .music-heading {
       display: flex;
       align-items: center;
-      gap: 11px;
       min-width: 0;
-      margin-bottom: 14px;
+      margin: 0;
     }
     .music-art {
-      display: grid;
-      place-items: center;
-      flex: 0 0 58px;
-      width: 58px;
-      height: 58px;
+      display: block;
+      flex: 0 0 44%;
+      width: 44%;
+      min-width: 0;
+      align-self: stretch;
       overflow: hidden;
-      border-radius: 12px;
+      border-radius: 14px;
       background: rgba(255,255,255,.09);
     }
     .music-art img {
@@ -1718,21 +1729,24 @@
     .music-title {
       min-width: 0;
       color: #fff;
-      font-size: 13px;
-      font-weight: 650;
-      letter-spacing: .035em;
+      font-size: 22px;
+      font-weight: 750;
+      letter-spacing: .025em;
+      line-height: 1.3;
       text-align: left;
+      overflow-wrap: anywhere;
     }
     .music-timeline {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     #musicSeekSlider {
       flex: 1;
       min-width: 0;
       width: 100%;
-      height: 4px;
+      height: 8px;
       margin: 0;
       accent-color: #fff;
       cursor: none !important;
@@ -1743,27 +1757,44 @@
       gap: 4px;
       flex: 0 0 auto;
       color: rgba(255,255,255,.78);
-      font-size: 11px;
+      font-size: 13px;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
     .music-card .volume-control {
-      margin-top: 13px;
+      margin-top: 0;
       padding: 0;
-      gap: 9px;
+      gap: 10px;
     }
     .music-card .volume-icon {
-      font-size: 17px;
+      font-size: 22px;
       line-height: 1;
     }
     .music-card #volumeSlider {
       width: 100%;
       min-width: 0;
+      height: 8px;
     }
     @media (max-width: 768px) {
       .music-card {
-        padding: 15px 17px;
+        min-height: 220px;
+        padding: 15px;
+        gap: 13px;
         border-radius: 18px;
+      }
+      .music-art {
+        flex-basis: 38%;
+        width: 38%;
+      }
+      .music-content {
+        gap: 20px;
+        padding: 6px 0;
+      }
+      .music-title {
+        font-size: 17px;
+      }
+      .music-time {
+        font-size: 10px;
       }
       .music-card .volume-control {
         display: none !important;
@@ -1970,17 +2001,19 @@
 </div>
 
   <section class="music-card" id="musicCard" aria-label="Audio player" inert>
-    <div class="music-heading">
-      <div class="music-art"><img src="./camoscio.png" alt="Camoscio cover"></div>
-      <div class="music-title">FSK - CAMOSCIO</div>
-    </div>
-    <div class="music-timeline">
-      <input id="musicSeekSlider" type="range" min="0" max="0" step="0.1" value="0" aria-label="Seek through FSK - CAMOSCIO">
-      <div class="music-time"><span id="musicCurrentTime">0:00</span><span>/</span><span id="musicDuration">0:00</span></div>
-    </div>
-    <div class="volume-control" id="volumeControlSection">
-      <span class="volume-icon" aria-hidden="true">♪</span>
-      <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+    <div class="music-art"><img src="./camoscio.pfp" alt="Camoscio cover"></div>
+    <div class="music-content">
+      <div class="music-heading">
+        <div class="music-title">FSK - CAMOSCIO</div>
+      </div>
+      <div class="music-timeline">
+        <input id="musicSeekSlider" type="range" min="0" max="0" step="0.1" value="0" aria-label="Seek through FSK - CAMOSCIO">
+        <div class="music-time"><span id="musicCurrentTime">0:00</span><span>/</span><span id="musicDuration">0:00</span></div>
+      </div>
+      <div class="volume-control" id="volumeControlSection">
+        <span class="volume-icon" aria-hidden="true">♪</span>
+        <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+      </div>
     </div>
   </section>
 </div>
